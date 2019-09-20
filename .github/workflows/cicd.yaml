@@ -15,7 +15,7 @@ jobs:
 
       - name: Filter non-master branches
         uses: actions/bin/filter@master
-        args: master
+        args: "branch master"
 
       - name: Log in to registry
         uses: actions/docker/login@master
