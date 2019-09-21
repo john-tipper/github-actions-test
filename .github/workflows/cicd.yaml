@@ -10,7 +10,7 @@ jobs:
         env:
           SEMVER_VERSION: 2.1.0
         run: |
-          sudo snap install skopeo --edge && \
+          sudo snap install skopeo --edge --devmode && \
           wget -O - https://github.com/fsaintjacques/semver-tool/archive/${SEMVER_VERSION}.tar.gz \
           | tar xvfz - semver-tool-${SEMVER_VERSION}/src/semver --strip 2 -C /usr/local/bin/
 
