@@ -10,7 +10,7 @@ jobs:
         env:
           SEMVER_VERSION: 2.1.0
         run: |
-          sudo /bin/bash -c "add-apt-repository ppa:projectatomic/ppa && apt-get update && apt-get install skopeo \
+          sudo /bin/bash -c "add-apt-repository ppa:projectatomic/ppa && apt-get update && apt-get install skopeo && \
           wget -O - https://github.com/fsaintjacques/semver-tool/archive/${SEMVER_VERSION}.tar.gz \
           | tar xvfz - semver-tool-${SEMVER_VERSION}/src/semver --strip 2 -C /usr/local/bin/"
 
@@ -33,11 +33,7 @@ jobs:
           args: "branch master"
 
       - name: Log in to registry
-        uses: actions/docker/login@master
-        env:
-          DOCKER_REGISTRY_URL: docker.pkg.github.com
-          DOCKER_USERNAME: ${{ github.actor }}
-          DOCKER_PASSWORD: ${{ secrets.package_registry_token }}
+        run: docker login docker.pkg.github.com -u ${{ github.actor }} -p ${{ secrets.package_registry_token }}
 
       - name: Publish to GitHub Package Registry
         run: echo publish
