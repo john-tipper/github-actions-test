@@ -6,6 +6,19 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      env:
+        SEMVER_VERSION: 2.1.0
+
+      - name: Install build tools
+        run: |
+          sudo snap install skopeo --edge && \
+          wget -O - https://github.com/fsaintjacques/semver-tool/archive/${SEMVER_VERSION}.tar.gz \
+          | tar xvfz - semver-tool-2.1.0/src/semver --strip 2 -C /usr/local/bin/
+
+      - name: Test installation of tools
+        run: |
+          skopeo --version && \
+          semver --version
 
       - name: Check out code
         uses: actions/checkout@v1
