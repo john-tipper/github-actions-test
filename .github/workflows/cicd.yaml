@@ -10,12 +10,13 @@ jobs:
         env:
           SEMVER_VERSION: 2.1.0
         run: |
-          add-apt-repository ppa:projectatomic/ppa && apt-get update && apt-get install skopeo \
+          sudo su && add-apt-repository ppa:projectatomic/ppa && apt-get update && apt-get install skopeo \
           wget -O - https://github.com/fsaintjacques/semver-tool/archive/${SEMVER_VERSION}.tar.gz \
           | tar xvfz - semver-tool-${SEMVER_VERSION}/src/semver --strip 2 -C /usr/local/bin/
 
       - name: Test installation of tools
         run: |
+          id && \
           skopeo --version && \
           ls -l /usr/local/bin && \
           semver --version
