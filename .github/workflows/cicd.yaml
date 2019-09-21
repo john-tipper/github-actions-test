@@ -19,6 +19,7 @@ jobs:
           id && \
           skopeo --version && \
           ls -l /usr/local/bin && \
+          sudo find / -name semver 2>/dev/null && \
           semver --version
 
       - name: Check out code
