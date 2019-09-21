@@ -12,7 +12,7 @@ jobs:
         run: |
           sudo /bin/bash -c "add-apt-repository ppa:projectatomic/ppa && apt-get update && apt-get install skopeo && \
           wget -O - https://github.com/fsaintjacques/semver-tool/archive/${SEMVER_VERSION}.tar.gz \
-          | tar xvfz - semver-tool-${SEMVER_VERSION}/src/semver --strip 2 -C /usr/local/bin/"
+          | tar xvfz - semver-tool-${SEMVER_VERSION}/src/semver --strip 2 -C /tmp && mv /tmp/skopeo /usr/local/bin/skopeo"
 
       - name: Test installation of tools
         run: |
@@ -38,7 +38,4 @@ jobs:
 
       - name: Publish to GitHub Package Registry
         run: echo publish
-
-
-
 
